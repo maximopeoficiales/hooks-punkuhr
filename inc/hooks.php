@@ -22,7 +22,7 @@ function hpWooNewOrder($id_order)
      $order =  wc_get_order($id_order);
      // si es una cotizacion
      if ($order->status ==  "ywraq-new") {
-          $sql = "INSERT INTO wp_cotizaciones (id_order,cod,date_created) VALUES ($order->id,0,%s)";
+          $sql = "INSERT INTO wp_cotizaciones (id_order,customer_id,cod,date_created) VALUES ($order->id,$order->customer_id,0,%s)";
           $wpdb->query($wpdb->prepare($sql, $fecha_actual));
      }
 }
