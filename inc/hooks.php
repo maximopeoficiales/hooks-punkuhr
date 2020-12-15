@@ -34,7 +34,6 @@ function hpDelete_user($user_id)
      $wpdb->query($sql);
      $wpdb->flush();
 }
-
 add_action('woocommerce_new_order', 'hpWooNewOrder');
 // add_action('woocommerce_resume_order', 'hpWooNewOrder');
 function hpWooNewOrder($id_order)
