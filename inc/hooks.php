@@ -51,3 +51,17 @@ function hpWooNewOrder($id_order)
      $sql = "INSERT INTO wp_cotizaciones (id_order,customer_id,cod,date_created) VALUES ($order->id,$order->customer_id,$cod,%s)";
      $wpdb->query($wpdb->prepare($sql, $fecha_actual));
 }
+
+// agrega la acción 
+add_action('woocommerce_order_status_changed', 'action_order_status_changed_hook_punkuhr', 10, 4);
+// define la devolución de llamada woocommerce_order_status_changed 
+function action_order_status_changed_hook_punkuhr($id_order)
+{
+     global $wpdb;
+     $fecha_actual = date("Y-m-d H:i:s");
+     $sql = "UPDATE wp_cotizaciones SET date_created=%s WHERE id_order =$id_order";
+     $wpdb->query($wpdb->prepare($sql, $fecha_actual));
+     $wpdb->flush();
+     // haz que la acción mágica suceda aquí ...
+
+};
