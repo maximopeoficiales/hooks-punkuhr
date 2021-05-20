@@ -52,6 +52,13 @@ function hpWooNewOrder($id_order)
      $wpdb->query($wpdb->prepare($sql, $fecha_actual));
 }
 
+add_action('woocommerce_delete_order', 'hpWooDeleteOrder');
+function hpWooDeleteOrder($id_order)
+{
+     global $wpdb;
+     $sql = "DELETE FROM wp_cotizaciones WHERE id_order = $id_order";
+     $wpdb->query($wpdb->prepare($sql));
+}
 // agrega la acción 
 add_action('woocommerce_order_status_changed', 'action_order_status_changed_hook_punkuhr', 10, 4);
 // define la devolución de llamada woocommerce_order_status_changed 
